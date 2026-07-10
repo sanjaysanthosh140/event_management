@@ -25,7 +25,7 @@ const services = [
   {
     src: "/wedding/party_3.jpg",
     title: "Corporate Events",
-    desc: "Launches, annual meets, and brand gatherings with seamless execution.",
+    desc: "Launches, annual meets, ajnd brand gatherings with seamless execution.",
   },
   {
     src: "/wedding/wedding_10.avif",
