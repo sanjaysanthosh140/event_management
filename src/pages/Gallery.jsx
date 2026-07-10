@@ -1,46 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 
 const slides = [
   {
     id: 1,
-    image:
-      "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=1074&auto=format&fit=crop",
-    name: "Scotland",
-    description:
-      "Experience the mystical Highlands under twilight skies and misty lochs.",
-    link: "#",
+    image: "/wedding/wedding_1.jpg",
+    name: "Grand Wedding",
+    description: "A timeless celebration of love with elegant décor and unforgettable moments.",
   },
   {
     id: 2,
-    image:
-      "https://images.unsplash.com/photo-1439792675105-701e6a4ab6f0?q=80&w=1173&auto=format&fit=crop",
-    name: "Norway",
-    description:
-      "Chase the Northern Lights under star-lit skies along scenic fjord roads.",
-    link: "#",
+    image: "/wedding/wedding_6.jpg",
+    name: "The Ceremony",
+    description: "Every vow, every smile — crafted into a perfect once-in-a-lifetime ceremony.",
   },
   {
     id: 3,
-    image:
-      "https://images.unsplash.com/photo-1483982258113-b72862e6cff6?q=80&w=1170&auto=format&fit=crop",
-    name: "New Zealand",
-    description:
-      "Wander dramatic, mist-laden mountain paths that feel straight out of a dream.",
-    link: "#",
+    image: "/wedding/reception_1.jpg",
+    name: "Reception Night",
+    description: "Lavish receptions filled with music, laughter, and endless joy.",
   },
   {
     id: 4,
-    image:
-      "https://images.unsplash.com/photo-1477346611705-65d1883cee1e?q=80&w=2070&auto=format&fit=crop",
-    name: "Japan",
-    description:
-      "Discover serene mountain temples shrouded in dusk and ancient forest trails.",
-    link: "#",
+    image: "/wedding/party_2.jpg",
+    name: "Celebration Party",
+    description: "Dance the night away in a vibrant atmosphere crafted just for you.",
+  },
+  {
+    id: 5,
+    image: "/wedding/wedding_10.avif",
+    name: "Moments",
+    description: "Capturing the most precious moments that last a lifetime.",
+  },
+  {
+    id: 6,
+    image: "/wedding/party_4.jpeg",
+    name: "Festive Gala",
+    description: "Elegant gatherings that blend tradition with modern sophistication.",
   },
 ];
 
-function Gallery() {
-  const [items, setItems] = React.useState(slides);
+export default function Gallery() {
+  const [items, setItems] = useState(slides);
 
   const handleNext = () => {
     setItems((prev) => {
@@ -52,48 +52,45 @@ function Gallery() {
   const handlePrev = () => {
     setItems((prev) => {
       const last = prev[prev.length - 1];
-      const rest = prev.slice(0, prev.length - 1);
-      return [last, ...rest];
+      return [last, ...prev.slice(0, prev.length - 1)];
     });
   };
 
   return (
-    <div className="gallery-page">
-      <div className="gallery-container">
-        <div className="gallery-slide">
-          {items.map((item, index) => (
-            <div
-              key={item.id}
-              className={`gallery-item gallery-item-pos-${index + 1}`}
-              style={{ backgroundImage: `url('${item.image}')` }}
-            >
-              <div className="gallery-content">
-                <div className="gallery-name">{item.name}</div>
-                <div className="gallery-des">{item.description}</div>
-                <a
-                  className="gallery-see-more"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={item.link}
-                >
-                  <button>See More</button>
-                </a>
+    <section className="gl-page">
+      <div className="gl-slide">
+        {items.map((item, index) => (
+          <div
+            key={item.id}
+            className={`gl-item gl-item--${index + 1}`}
+            style={{ backgroundImage: `url('${item.image}')` }}
+          >
+            {index === 1 && (
+              <div className="gl-content">
+                <p className="gl-tag">LuxeEvents Gallery</p>
+                <h2 className="gl-name">{item.name}</h2>
+                <p className="gl-des">{item.description}</p>
+                <button className="gl-btn">Explore More</button>
               </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="gallery-button">
-          <button className="gallery-prev" onClick={handlePrev}>
-            &#9665;
-          </button>
-          <button className="gallery-next" onClick={handleNext}>
-            &#9655;
-          </button>
-        </div>
+            )}
+          </div>
+        ))}
       </div>
-    </div>
+
+      <div className="gl-nav">
+        <button className="gl-nav-btn" onClick={handlePrev} aria-label="Previous">
+          &#9665;
+        </button>
+        <button className="gl-nav-btn" onClick={handleNext} aria-label="Next">
+          &#9655;
+        </button>
+      </div>
+
+      <div className="gl-counter">
+        {slides.map((_, i) => (
+          <span key={i} className={`gl-dot${i === 0 ? " gl-dot--active" : ""}`} />
+        ))}
+      </div>
+    </section>
   );
 }
-
-export default Gallery;
