@@ -61,16 +61,18 @@ body {
 }
 
 .services-page {
-  height: 100vh;
-  overflow: hidden;
-  overscroll-behavior: none;
+  height: 500vh;
   background: #333434;
   color: #fff;
+  position: relative;
 }
 
 .services-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
   display: flex;
-  min-height: 100vh;
+  overflow: hidden;
 }
 
 .services-wheel-section {
@@ -479,11 +481,16 @@ body {
   }
 
   .services-content-section {
-    padding: 30px 20px 90px;
+    padding: 10px 20px 40px;
+    justify-content: flex-start;
   }
 
-  .services-scroll-content {
-    min-height: 72vh;
+  .services-intro-block {
+    margin-bottom: 20px;
+  }
+
+  .services-slider-window {
+    height: 35vh;
   }
 
   .services-nav-btn {

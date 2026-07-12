@@ -157,41 +157,33 @@ function Services() {
   useEffect(() => {
     setRadius(getRadius());
 
-    const handleWheel = (e) => {
-      setRotation((prev) => {
-        const next = prev - e.deltaY * 0.15;
-        return Math.min(0, Math.max(-330, next));
-      });
-    };
-
-    let touchStartY = 0;
-    const handleTouchStart = (e) => {
-      touchStartY = e.touches[0].clientY;
-    };
-    const handleTouchMove = (e) => {
-      const touchY = e.touches[0].clientY;
-      const delta = touchStartY - touchY;
-      setRotation((prev) => {
-        const next = prev - delta * 0.5;
-        return Math.min(0, Math.max(-330, next));
-      });
-      touchStartY = touchY;
+    const handleScroll = () => {
+      if (!pageRef.current) return;
+      const rect = pageRef.current.getBoundingClientRect();
+      const scrollableDistance = rect.height - window.innerHeight;
+      
+      let progress = 0;
+      if (scrollableDistance > 0) {
+        progress = -rect.top / scrollableDistance;
+        progress = Math.max(0, Math.min(1, progress));
+      }
+      
+      setRotation(-330 * progress);
     };
 
     const handleResize = () => {
       setRadius(getRadius());
       setIsMobile(window.innerWidth <= 900);
+      handleScroll();
     };
 
-    window.addEventListener("wheel", handleWheel, { passive: true });
-    window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleResize);
 
+    handleScroll();
+
     return () => {
-      window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
   }, []);
