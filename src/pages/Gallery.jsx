@@ -4,85 +4,85 @@ import './Gallery.css';
 const galleryItems = [
   {
     id: 1,
-    image: "https://picsum.photos/id/1015/400/400",
+    image: "/wedding/wedding_1.jpg",
     name: "River Canyon",
     description: "Nature Photography"
   },
   {
     id: 2,
-    image: "https://picsum.photos/id/1016/400/400",
+    image: "/wedding/wedding_2.jpg",
     name: "Mountain Peak",
     description: "Expedition 2026"
   },
   {
     id: 3,
-    image: "https://picsum.photos/id/1018/400/400",
+    image: "/wedding/wedding_3.jpg",
     name: "Alpine Fog",
     description: "Winter Series"
   },
   {
     id: 4,
-    image: "https://picsum.photos/id/1019/400/400",
+    image: "/wedding/wedding_4.jpg",
     name: "Coastal Waves",
     description: "Ocean View"
   },
   {
     id: 5,
-    image: "https://picsum.photos/id/1020/400/400",
+    image: "/wedding/wedding_5.jpg",
     name: "Wilderness",
     description: "Wildlife Reserve"
   },
   {
     id: 6,
-    image: "https://picsum.photos/id/1021/400/400",
+    image: "/wedding/wedding_6.jpg",
     name: "Deep Forest",
     description: "Canopy Exploration"
   },
   {
     id: 7,
-    image: "https://picsum.photos/id/1022/400/400",
+    image: "/wedding/wedding_7.jpg",
     name: "Aurora",
     description: "Night Sky"
   },
   {
     id: 8,
-    image: "https://picsum.photos/id/1023/400/400",
+    image: "/wedding/wedding_8.jpg",
     name: "The Journey",
     description: "Urban Transit"
   },
   {
     id: 9,
-    image: "https://picsum.photos/id/1024/400/400",
+    image: "/wedding/reception_1.jpg",
     name: "Flight",
     description: "Aerial Photography"
   },
   {
     id: 10,
-    image: "https://picsum.photos/id/1025/400/400",
+    image: "/wedding/party_1.avif",
     name: "Cozy Mornings",
     description: "Portrait Series"
   },
   {
     id: 11,
-    image: "https://picsum.photos/id/1026/400/400",
+    image: "/wedding/party_2.jpg",
     name: "Barren Lands",
     description: "Desert Textures"
   },
   {
     id: 12,
-    image: "https://picsum.photos/id/1027/400/400",
+    image: "/wedding/party_3.jpg",
     name: "Winter Solstice",
     description: "Fashion Editorial"
   },
   {
     id: 13,
-    image: "https://picsum.photos/id/1028/400/400",
+    image: "/wedding/party_4.jpeg",
     name: "Undergrowth",
     description: "Macro Nature"
   },
   {
     id: 14,
-    image: "https://picsum.photos/id/1029/400/400",
+    image: "/wedding/party_5.jpg",
     name: "Concrete Oasis",
     description: "Cityscapes"
   }

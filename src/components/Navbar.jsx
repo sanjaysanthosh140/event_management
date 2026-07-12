@@ -115,16 +115,14 @@ function Navbar() {
       <header
         className={`fixed top-0 right-0 left-0 z-50 transition-all duration-500 ease-out ${
           scrolled && !menuOpen
-            ? "bg-luxury-bg/70 shadow-lg shadow-black/20 backdrop-blur-xl"
+            ? "bg-luxury-bg/70 backdrop-blur-xl"
             : "bg-transparent"
         }`}
       >
         {/* Desktop layout */}
         <div className="hidden h-20 items-center justify-between px-10 lg:flex">
           <Link to="/" className="group flex items-center">
-            <span className="font-display text-2xl tracking-wide text-luxury-text">
-              Luxe<span className="text-luxury-accent">Events</span>
-            </span>
+            <img src="/q_logo.png" alt="Logo" className="h-12 w-auto" style={{height:"80px"}} />
           </Link>
 
           <nav className="flex items-center gap-8">
@@ -166,13 +164,11 @@ function Navbar() {
       {/* Mobile logo — fixed top-left */}
       <Link
         to="/"
-        className={`fixed top-[18px] left-[18px] z-[60] lg:hidden ${
+        className={`fixed top-[18px] left-[18px] z-[60] lg:hidden flex items-center ${
           menuOpen ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >
-        <span className="font-display text-lg tracking-wide text-luxury-text">
-          Luxe<span className="text-luxury-accent">Events</span>
-        </span>
+        <img src="/q_logo.png" alt="Logo" className="h-8 w-auto" />
       </Link>
 
       {/* Mobile toggle — fixed top-right, same position open & closed */}
