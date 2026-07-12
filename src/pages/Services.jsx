@@ -142,62 +142,58 @@ function ServicesModal({ item, onClose, onPrevious, onNext }) {
 function Services() {
   const pageRef = useRef(null);
   const wheelRef = useRef(null);
-  const serviceSectionRefs = useRef([]);
-  const lastScrollY = useRef(0);
   const [rotation, setRotation] = useState(0);
   const [radius, setRadius] = useState(400);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(null);
-  const [activeServiceIndex, setActiveServiceIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 900);
+
+  let activeServiceIndex = Math.round(-rotation / 30);
+  if (activeServiceIndex < 0) activeServiceIndex = 0;
+  if (activeServiceIndex > 11) activeServiceIndex = 11;
 
   const activeItem = currentIndex === null ? null : services[currentIndex];
 
   useEffect(() => {
-    lastScrollY.current = window.scrollY;
     setRadius(getRadius());
 
-    const handleScroll = () => {
-      const nextScrollY = window.scrollY;
-      const delta = nextScrollY - lastScrollY.current;
-
-      setRotation((prev) => prev + delta * 0.15);
-      lastScrollY.current = nextScrollY;
+    const handleWheel = (e) => {
+      setRotation((prev) => {
+        const next = prev - e.deltaY * 0.15;
+        return Math.min(0, Math.max(-330, next));
+      });
     };
 
-    const handleResize = () => setRadius(getRadius());
+    let touchStartY = 0;
+    const handleTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY;
+    };
+    const handleTouchMove = (e) => {
+      const touchY = e.touches[0].clientY;
+      const delta = touchStartY - touchY;
+      setRotation((prev) => {
+        const next = prev - delta * 0.5;
+        return Math.min(0, Math.max(-330, next));
+      });
+      touchStartY = touchY;
+    };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    const handleResize = () => {
+      setRadius(getRadius());
+      setIsMobile(window.innerWidth <= 900);
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: true });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
     window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-        if (visible) {
-          setActiveServiceIndex(Number(visible.target.dataset.serviceIndex));
-        }
-      },
-      {
-        root: null,
-        rootMargin: "-35% 0px -35% 0px",
-        threshold: [0.25, 0.5, 0.75],
-      }
-    );
-
-    serviceSectionRefs.current.forEach((section) => {
-      if (section) observer.observe(section);
-    });
-
-    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -240,7 +236,9 @@ function Services() {
   const wheelItems = useMemo(
     () =>
       services.map((item, index) => {
-        const angle = (360 * index) / services.length;
+        const baseAngle = (360 * index) / services.length;
+        const mobileOffset = isMobile ? 90 : 0;
+        const angle = baseAngle + mobileOffset;
         const counterRotation = -(angle + rotation);
         const isHovered = hoveredIndex === index;
         const isActive = activeServiceIndex === index;
@@ -248,9 +246,8 @@ function Services() {
         return {
           ...item,
           angle,
-          transform: `rotate(${angle}deg) translate(${radius}px) rotate(${counterRotation}deg)${
-            isHovered ? " scale(1.2)" : ""
-          }`,
+          transform: `rotate(${angle}deg) translate(${radius}px) rotate(${counterRotation}deg)`,
+          scale: isHovered ? 1.2 : 1,
           isHovered,
           isActive,
         };
@@ -272,6 +269,7 @@ function Services() {
                   style={{
                     backgroundImage: `url("${item.src}")`,
                     transform: item.transform,
+                    scale: item.scale,
                     zIndex: item.isHovered || item.isActive ? 10 : "auto",
                     boxShadow: item.isHovered || item.isActive
                       ? "0 0 30px rgba(255, 215, 0, 0.8)"
@@ -300,28 +298,28 @@ function Services() {
             </p>
           </div>
 
-          {services.map((service, index) => (
-            <section
-              key={service.title}
-              ref={(node) => {
-                serviceSectionRefs.current[index] = node;
-              }}
-              className="services-scroll-content"
-              data-service-index={index}
+          <div className="services-slider-window">
+            <div 
+              className="services-slider-track"
+              style={{ transform: `translateY(-${activeServiceIndex * 50}vh)` }}
             >
-              <button
-                type="button"
-                className="services-scroll-content-inner"
-                onClick={() => openModal(index)}
-              >
-                <span className="services-content-number">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="services-content-title">{service.title}</span>
-                <span className="services-content-desc">{service.desc}</span>
-              </button>
-            </section>
-          ))}
+              {services.map((service, index) => (
+                <div key={service.title} className="services-slider-item">
+                  <button
+                    type="button"
+                    className={`services-scroll-content-inner ${activeServiceIndex === index ? 'is-active' : ''}`}
+                    onClick={() => openModal(index)}
+                  >
+                    <span className="services-content-number">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="services-content-title">{service.title}</span>
+                    <span className="services-content-desc">{service.desc}</span>
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
       </div>
 
