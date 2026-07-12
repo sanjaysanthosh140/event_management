@@ -122,7 +122,7 @@ function Navbar() {
         {/* Desktop layout */}
         <div className="hidden h-20 items-center justify-between px-10 lg:flex">
           <Link to="/" className="group flex items-center">
-            <img src="/q_logo.png" alt="Logo" className="h-12 w-auto" style={{height:"80px"}} />
+            <img src="/q_logo.png" alt="Logo" className="h-16 sm:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
           </Link>
 
           <nav className="flex items-center gap-8">
@@ -164,11 +164,11 @@ function Navbar() {
       {/* Mobile logo — fixed top-left */}
       <Link
         to="/"
-        className={`fixed top-[18px] left-[18px] z-[60] lg:hidden flex items-center ${
+        className={`fixed top-[18px] left-[18px] z-[60] lg:hidden flex items-center transition-opacity duration-300 ${
           menuOpen ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >
-        <img src="/q_logo.png" alt="Logo" className="h-8 w-auto" />
+        <img src="/q_logo.png" alt="Logo" className="h-12 w-auto object-contain" />
       </Link>
 
       {/* Mobile toggle — fixed top-right, same position open & closed */}

@@ -135,6 +135,33 @@
   color: #d4af37;
 }
 
+/* Floating Call Button */
+.call-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 115px; /* Above WhatsApp */
+  left: 40px; 
+  background-color: #d4af37; /* Theme color */
+  color: #111;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 24px;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+}
+
+.call-float:hover {
+  transform: scale(1.1);
+  box-shadow: 2px 2px 15px rgba(212, 175, 55, 0.5);
+  color: #111;
+}
+
 /* Floating WhatsApp Button */
 .whatsapp-float {
   position: fixed;
@@ -178,6 +205,13 @@
     flex-direction: column;
     text-align: center;
     gap: 15px;
+  }
+  .call-float {
+    bottom: 80px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
   }
   .whatsapp-float {
     bottom: 20px;

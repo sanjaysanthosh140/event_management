@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="footer-content">
           {/* Column 1: Brand Info */}
           <div className="footer-column">
-            <h3>Celestial Celebrations</h3>
+            <h3>Olam Wedding Planners</h3>
             <p>
               Creating extraordinary celebrations and unforgettable moments since 2015. Your vision is our passion, and your satisfaction is our guarantee.
             </p>
@@ -78,13 +78,22 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <div>
-            &copy; {new Date().getFullYear()} Celestial Celebrations. All rights reserved.
+            &copy; {new Date().getFullYear()} Olam Wedding Planners. All rights reserved.
           </div>
           <div className="footer-bottom-links">
             <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
           </div>
         </div>
       </footer>
+
+      {/* Floating Call Button */}
+      <a 
+        href="tel:+919074226502" 
+        className="call-float" 
+        aria-label="Call us"
+      >
+        <FaPhoneAlt />
+      </a>
 
       {/* Floating WhatsApp Icon on the LEFT side */}
       <a 

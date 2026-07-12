@@ -19,7 +19,7 @@ function Contact() {
     e.preventDefault();
     
     // Construct the WhatsApp message
-    const phoneNumber = "917736201975"; // The owner's WhatsApp number
+    const phoneNumber = "919074226502"; // The owner's WhatsApp number
     const text = `Hello Olam wedding planners! 
 I would like to inquire about an event.
 
