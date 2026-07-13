@@ -283,12 +283,7 @@ function Services() {
         </section>
 
         <section className="services-content-section" aria-label="Our services">
-          <div className="services-intro-block">
-            <p className="services-intro">
-              Thoughtful planning, polished design, and calm coordination for celebrations that feel
-              personal from the first welcome to the final farewell.
-            </p>
-          </div>
+
 
           <div className="services-slider-window">
             <div 

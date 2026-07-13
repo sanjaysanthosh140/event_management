@@ -498,15 +498,31 @@ body {
   }
 
   .services-content-section {
-    padding: 10px 20px 40px;
+    /* Reduced padding frees vertical space for the slider window.
+       overflow:hidden prevents any content leaking outside the 100vh sticky box. */
+    padding: 8px 20px 16px;
     justify-content: flex-start;
+    overflow: hidden;
   }
 
   .services-intro-block {
-    margin-bottom: 20px;
+    /* HIDDEN on mobile: the intro paragraph consumes ~100px that the slider
+       window needs. On small phones (iPhone SE = 568px) this is what pushes
+       the slider window outside the 100vh sticky container, making service
+       items 05–12 unreachable. Desktop still shows it fine. */
+    display: none;
   }
 
   .services-slider-window {
+    /* 35vh window must match item height (see below) so the JS
+       translateY(-activeIndex * 35vh) lands each item exactly at the top. */
+    height: 35vh;
+  }
+
+  .services-slider-item {
+    /* MUST match .services-slider-window height (35vh) on mobile.
+       The global 50vh value means content centered in 50vh gets bottom-clipped
+       by the 35vh window — descriptions for items 05+ are invisible. */
     height: 35vh;
   }
 
