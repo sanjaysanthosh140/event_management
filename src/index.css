@@ -72,7 +72,9 @@ body {
   top: 0;
   height: 100vh;
   display: flex;
-  overflow: hidden;
+  /* REMOVED overflow:hidden — on iOS Safari, overflow:hidden on a position:sticky
+     element itself disables stickiness. Clipping is now handled by
+     .services-wheel-section which has its own overflow:hidden. */
 }
 
 .services-wheel-section {
@@ -81,12 +83,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  /* Clip the 900px wheel that extends beyond the half-width section.
+     This replaces the overflow:hidden that was on .services-container. */
+  overflow: hidden;
 }
 
 .services-wheel-container {
-  position: fixed;
-  top: 0;
+  /* FIX: was position:fixed — breaks when any ancestor has transform/filter
+     (Framer Motion's motion.div applies filter:brightness(…)).
+     position:absolute inside .services-wheel-section (relative) which lives
+     inside .services-container (sticky; top:0; height:100vh) gives the same
+     pinned-to-viewport visual without depending on the real viewport. */
+  position: absolute;
+  top: 50%;
   left: -450px;
+  transform: translateY(-50%); /* vertically center — was missing on desktop */
 }
 
 .services-wheel {
@@ -455,16 +466,22 @@ body {
   .services-wheel-section {
     width: 100%;
     height: 320px;
-    justify-content: center;
+    /* flex-start mirrors desktop: the wheel anchors from the LEFT edge,
+       not floating in the middle. overflow:hidden clips the left half. */
+    justify-content: flex-start;
     position: relative;
     overflow: hidden;
   }
-
   .services-wheel-container {
+    /* DESKTOP PATTERN replicated at mobile scale:
+       Desktop: wheel=900px, radius=450px → left:-450px puts center at 0 (section left edge)
+       Mobile:  wheel=500px, radius=250px → left:-250px puts center at 0 (section left edge)
+       overflow:hidden on the section clips the left half → clean right half-arc visible.
+       No translateX here — we are NOT centering horizontally. */
     position: absolute;
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    left: -250px;
+    transform: translateY(-50%);
   }
 
   .services-wheel {
@@ -514,7 +531,9 @@ body {
   }
 
   .services-wheel-container {
-    transform: translateX(-50%) scale(0.78);
+    /* left:-250px is inherited from ≤900px (left-anchor, NOT horizontal center).
+       Only need vertical re-centering + scale — no translateX. */
+    transform: translateY(-50%) scale(0.78);
   }
 
   .services-scroll-indicator {
