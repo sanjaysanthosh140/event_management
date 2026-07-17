@@ -119,13 +119,13 @@ function Navbar() {
             : "bg-transparent"
         }`}
       >
-        {/* Desktop layout */}
-        <div className="hidden h-20 items-center justify-between px-10 lg:flex">
+        {/* Desktop layout — push nav links away from the right edge */}
+        <div className="hidden h-20 w-full items-center justify-between pl-10 lg:flex">
           <Link to="/" className="group flex items-center">
             <img src="/q_logo.png" alt="Logo" className="h-16 sm:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
           </Link>
 
-          <nav className="flex items-center gap-8">
+          <nav className="navbar-desktop-links flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.path}

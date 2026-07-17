@@ -7,6 +7,7 @@ import Gallery from "./pages/Gallery";
 import Services from "./pages/Services";
 import About from "./pages/About";
 import Footer from "./pages/Footer";
+import FloatingContact from "./components/FloatingContact";
 
 // Page transition wrapper component
 const PageTransition = ({ children }) => {
@@ -44,6 +45,7 @@ function App() {
       <Navbar />
       <AnimatedRoutes />
       <Footer />
+      <FloatingContact />
     </BrowserRouter>
   );
 }

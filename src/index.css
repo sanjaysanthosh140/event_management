@@ -1227,3 +1227,22 @@ body {
     );
   }
 }
+
+/* Desktop navbar — gap between Contact and the right edge */
+@media (min-width: 1024px) {
+  .navbar-desktop-links {
+    margin-right: 3rem !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .navbar-desktop-links {
+    margin-right: 4rem !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .navbar-desktop-links {
+    margin-right: 5rem !important;
+  }
+}
