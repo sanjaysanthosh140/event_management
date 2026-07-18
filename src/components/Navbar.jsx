@@ -120,9 +120,9 @@ function Navbar() {
         }`}
       >
         {/* Desktop layout — push nav links away from the right edge */}
-        <div className="hidden h-20 w-full items-center justify-between pl-10 lg:flex">
+        <div className="hidden h-24 w-full items-center justify-between pl-10 lg:flex">
           <Link to="/" className="group flex items-center">
-            <img src="/q_logo.png" alt="Logo" className="h-16 sm:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
+            <img src="/OLAM_logo_transparent%20(2).png" alt="Olam Wedding Planners" className="h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105 xl:h-28" />
           </Link>
 
           <nav className="navbar-desktop-links flex items-center gap-8">
@@ -168,7 +168,7 @@ function Navbar() {
           menuOpen ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >
-        <img src="/q_logo.png" alt="Logo" className="h-12 w-auto object-contain" />
+        <img src="/OLAM_logo_transparent%20(2).png" alt="Olam Wedding Planners" className="h-16 w-auto object-contain" />
       </Link>
 
       {/* Mobile toggle — fixed top-right, same position open & closed */}

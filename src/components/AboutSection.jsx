@@ -36,9 +36,9 @@ export default function AboutSection() {
 
         {/* Left: dual logo card */}
         <div className="about-logo-card">
-          <img src="/q_logo.png" alt="Olam Wedding Planners logo" className="about-logo-img" />
+          <img src="/OLAM_logo_transparent%20(2).png" alt="Olam Wedding Planners logo" className="about-logo-img" />
           <div className="about-logo-divider" />
-          <img src="/q_logo.png" alt="Olam Wedding Planners logo" className="about-logo-img" />
+          <img src="/OLAM_logo_transparent%20(2).png" alt="Olam Wedding Planners logo" className="about-logo-img" />
         </div>
 
         {/* Center: headline */}
