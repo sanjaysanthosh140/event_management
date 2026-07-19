@@ -3,62 +3,62 @@ import { createPortal } from "react-dom";
 
 const services = [
   {
-    src: "/wedding/wedding_1.jpg",
+    src: "/wedding/wedding_1.webp",
     title: "Wedding Planning",
     desc: "Complete celebration design, vendor coordination, and timeline management.",
   },
   {
-    src: "/wedding/party_1.avif",
+    src: "/wedding/party_1.webp",
     title: "Private Parties",
     desc: "Immersive parties with polished styling, music, lighting, and flow.",
   },
   {
-    src: "/wedding/reception_1.jpg",
+    src: "/wedding/reception_1.webp",
     title: "Reception Design",
     desc: "Elegant guest experiences shaped around dining, decor, and atmosphere.",
   },
   {
-    src: "/wedding/wedding_3.jpg",
+    src: "/wedding/wedding_3.webp",
     title: "Ceremony Styling",
     desc: "Mandaps, aisles, florals, and stage moments composed with intention.",
   },
   {
-    src: "/wedding/party_3.jpg",
+    src: "/wedding/party_3.webp",
     title: "Corporate Events",
     desc: "Launches, annual meets, ajnd brand gatherings with seamless execution.",
   },
   {
-    src: "/wedding/wedding_10.avif",
+    src: "/wedding/wedding_10.webp",
     title: "Destination Events",
     desc: "Travel-aware planning for multi-day celebrations and resort experiences.",
   },
   {
-    src: "/wedding/party_5.jpg",
+    src: "/wedding/party_5.webp",
     title: "Entertainment",
     desc: "Artists, performances, DJs, anchors, and guest-engagement moments.",
   },
   {
-    src: "/wedding/wedding_5.jpg",
+    src: "/wedding/wedding_5.webp",
     title: "Decor Production",
     desc: "Custom builds, floral installations, lighting, furniture, and styling.",
   },
   {
-    src: "/wedding/party_7.jpg",
+    src: "/wedding/party_7.webp",
     title: "Birthday Events",
     desc: "Personal celebrations designed with playful detail and smooth hosting.",
   },
   {
-    src: "/wedding/wedding_7.jpg",
+    src: "/wedding/wedding_7.webp",
     title: "Photography",
     desc: "Creative capture teams for candid, editorial, and cinematic memories.",
   },
   {
-    src: "/wedding/party_8.jpg",
+    src: "/wedding/party_8.webp",
     title: "Catering Setup",
     desc: "Menu planning, service layout, and dining experiences guests remember.",
   },
   {
-    src: "/wedding/wedding_11.jpg",
+    src: "/wedding/wedding_11.webp",
     title: "Guest Management",
     desc: "Invites, RSVPs, hospitality desks, travel support, and on-ground care.",
   },

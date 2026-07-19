@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import './About.css';
-
+import about from'../../public/wedding/reception_1.webp'
 const About = () => {
   useEffect(() => {
     AOS.init({
@@ -20,7 +20,7 @@ const About = () => {
         
         <div className="about-content">
           <div className="about-image-container" data-aos="fade-right" data-aos-duration="1000">
-            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Wedding Celebration" className="about-image" />
+            <img src={about} alt="Wedding Celebration" className="about-image" />
             <div className="about-experience">
               <span className="years">8+</span>
               <span className="text">Years of<br/>Experience</span>

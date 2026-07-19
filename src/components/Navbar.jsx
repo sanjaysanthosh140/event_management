@@ -120,9 +120,9 @@ function Navbar() {
         }`}
       >
         {/* Desktop layout — push nav links away from the right edge */}
-        <div className="hidden h-24 w-full items-center justify-between pl-10 lg:flex">
-          <Link to="/" className="group flex items-center">
-            <img src="/OLAM_logo_transparent%20(2).png" alt="Olam Wedding Planners" className="h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105 xl:h-28" />
+        <div className="hidden h-20 w-full items-center justify-between pl-12 pr-8 lg:flex xl:pl-16 xl:pr-10">
+          <Link to="/" className="group flex items-center gap-3">
+            <img src="/OLAM_logo_transparent%20(2).png" alt="Olam Wedding Planners" className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 xl:h-14" />
           </Link>
 
           <nav className="navbar-desktop-links flex items-center gap-8">
@@ -164,11 +164,11 @@ function Navbar() {
       {/* Mobile logo — fixed top-left */}
       <Link
         to="/"
-        className={`fixed top-[18px] left-[18px] z-[60] lg:hidden flex items-center transition-opacity duration-300 ${
+        className={`fixed top-[14px] left-7 z-[60] lg:hidden flex items-center gap-2 transition-opacity duration-300 ${
           menuOpen ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >
-        <img src="/OLAM_logo_transparent%20(2).png" alt="Olam Wedding Planners" className="h-16 w-auto object-contain" />
+        <img src="/OLAM_logo_transparent%20(2).png" alt="Olam Wedding Planners" className="h-11 w-auto object-contain" />
       </Link>
 
       {/* Mobile toggle — fixed top-right, same position open & closed */}

@@ -18,6 +18,7 @@ const accordionItems = [
   },
 ];
 
+
 const stats = [
   { value: "200+", label: "PROJECTS DONE" },
   { value: "200+", label: "HAPPY CLIENTS" },
