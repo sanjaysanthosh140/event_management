@@ -1,13 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-function pickRandomImage(images, exclude) {
-  if (images.length <= 1) return images[0];
-  let next = exclude;
-  while (next === exclude) {
-    next = images[Math.floor(Math.random() * images.length)];
+export function pickDistinctImages(images, count) {
+  const pool = [...images];
+  for (let i = pool.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
   }
-  return next;
+  return pool.slice(0, Math.min(count, pool.length));
+}
+
+export function pickRandomImage(images, excludeList = []) {
+  const exclude = new Set(
+    (Array.isArray(excludeList) ? excludeList : [excludeList]).filter(Boolean),
+  );
+  const pool = images.filter((img) => !exclude.has(img));
+  const source = pool.length > 0 ? pool : images;
+  return source[Math.floor(Math.random() * source.length)];
 }
 
 export default function AutoRandomImage({
@@ -15,19 +24,26 @@ export default function AutoRandomImage({
   className = "",
   minInterval = 2800,
   maxInterval = 4500,
+  initialImage,
+  getNextImage,
 }) {
-  const [layerA, setLayerA] = useState(
-    () => images[Math.floor(Math.random() * images.length)],
-  );
-  const [layerB, setLayerB] = useState(() =>
-    pickRandomImage(images, images[0]),
-  );
+  const startImage =
+    initialImage || images[Math.floor(Math.random() * images.length)];
+  // Keep both layers on the same start image until the first swap,
+  // so we never "claim" a sibling-conflicting image while still hidden.
+  const [layerA, setLayerA] = useState(startImage);
+  const [layerB, setLayerB] = useState(startImage);
   const [showB, setShowB] = useState(false);
   const stateRef = useRef({ layerA, layerB, showB });
+  const getNextRef = useRef(getNextImage);
 
   useEffect(() => {
     stateRef.current = { layerA, layerB, showB };
   }, [layerA, layerB, showB]);
+
+  useEffect(() => {
+    getNextRef.current = getNextImage;
+  }, [getNextImage]);
 
   useEffect(() => {
     let timeoutId;
@@ -37,12 +53,16 @@ export default function AutoRandomImage({
       timeoutId = setTimeout(() => {
         const { layerA: currentA, layerB: currentB, showB: showingB } =
           stateRef.current;
+        const resolveNext = (current) =>
+          getNextRef.current
+            ? getNextRef.current(current)
+            : pickRandomImage(images, current);
 
         if (showingB) {
-          setLayerA(pickRandomImage(images, currentB));
+          setLayerA(resolveNext(currentB));
           setShowB(false);
         } else {
-          setLayerB(pickRandomImage(images, currentA));
+          setLayerB(resolveNext(currentA));
           setShowB(true);
         }
 

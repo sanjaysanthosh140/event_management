@@ -1,16 +1,41 @@
+import { useCallback, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import AutoRandomImage from "./AutoRandomImage";
+import AutoRandomImage, {
+  pickDistinctImages,
+  pickRandomImage,
+} from "./AutoRandomImage";
 import { serviceImages } from "./serviceImages";
 import { servicesData } from "./servicesData";
 import "./Services.css";
 
 const trioSlots = [
   { className: "services-trio-card services-trio-left" },
-  { className: "services-trio-card services-trio-center services-trio-center-large" },
+  {
+    className:
+      "services-trio-card services-trio-center services-trio-center-large",
+  },
   { className: "services-trio-card services-trio-right" },
 ];
 
 export default function Services() {
+  const [trioImages] = useState(() =>
+    pickDistinctImages(serviceImages, trioSlots.length),
+  );
+  const activeRef = useRef([...trioImages]);
+
+  const makeGetNextImage = useCallback(
+    (slotIndex) => (currentVisible) => {
+      const siblings = activeRef.current.filter((_, i) => i !== slotIndex);
+      const next = pickRandomImage(serviceImages, [
+        ...siblings,
+        currentVisible,
+      ]);
+      activeRef.current[slotIndex] = next;
+      return next;
+    },
+    [],
+  );
+
   return (
     <section className="p-90 hm-services">
       <div className="services-inner">
@@ -25,14 +50,16 @@ export default function Services() {
         </div>
 
         <div className="services-scroll-gallery">
-          <div className="services-trio-stage">
+          <div className="services-trio-stage" aria-hidden="true">
             {trioSlots.map((slot, index) => (
               <AutoRandomImage
                 key={slot.className}
                 images={serviceImages}
                 className={slot.className}
-                minInterval={2500 + index * 400}
-                maxInterval={4200 + index * 500}
+                initialImage={trioImages[index]}
+                getNextImage={makeGetNextImage(index)}
+                minInterval={2800 + index * 500}
+                maxInterval={4800 + index * 600}
               />
             ))}
           </div>
